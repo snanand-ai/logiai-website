@@ -8,8 +8,11 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 border-b border-ink/10 bg-white/85 backdrop-blur">
       <Container className="flex h-16 items-center justify-between">
         <a href="/" className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-lg bg-ink" />
-          <span className="text-sm font-bold tracking-tight">LogiAI</span>
+  <img
+    src="/logo.png"
+    alt="LogiAI"
+    className="h-9 w-auto"
+  />
         </a>
 
         <nav className="hidden items-center gap-6 md:flex">
