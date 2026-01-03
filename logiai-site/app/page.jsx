@@ -3,7 +3,12 @@ export default function Home() {
     <section className="min-h-screen bg-white text-slate-900">
       {/* Hero */}
       <div className="max-w-6xl mx-auto px-6 pt-28 pb-24 text-center">
-        <h1 className="text-5xl md:text-6xl font-semibold leading-tight">
+        <img
+  src="/logo.png"
+  alt="LogiAI"
+  className="h-24 md:h-28 mb-6"
+/>
+<h1 className="text-5xl md:text-6xl font-semibold leading-tight">
           Intelligence before automation
         </h1>
 
