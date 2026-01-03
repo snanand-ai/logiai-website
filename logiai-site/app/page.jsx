@@ -2,25 +2,23 @@
   <div className="mx-auto max-w-6xl px-6 py-28">
     <div className="flex flex-col items-center text-center">
 
-      {/* Centered Hero Logo */}
+      {/* Big centered logo */}
       <img
         src="/logo.png"
         alt="LogiAI"
-        className="h-44 md:h-56 mb-10"
+        className="mx-auto block h-48 md:h-60 w-auto mb-10"
       />
 
-      {/* Headline under logo */}
+      {/* Headline directly under logo */}
       <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-slate-900">
         Intelligence before automation
       </h1>
 
-      {/* Subheadline */}
       <p className="mt-6 max-w-3xl text-lg text-slate-600">
         LogiAI is an Optimization Mesh for logistics. It pauses chaos, reasons through
         complexity, and guides humans to better decisions.
       </p>
 
-      {/* CTAs */}
       <div className="mt-12 flex flex-col sm:flex-row gap-4">
         <a
           href="/contact"
