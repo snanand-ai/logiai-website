@@ -1,3 +1,4 @@
+"use client";
 <section className="bg-white">
   <div className="mx-auto max-w-6xl px-6 py-28">
     <div className="flex flex-col items-center text-center">
