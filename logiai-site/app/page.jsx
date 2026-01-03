@@ -1,8 +1,3 @@
-// app/page.jsx
-// IMPORTANT:
-// 1) Do NOT import the logo (no: import logo from "...").
-// 2) Put the logo file here: logiai-site/public/logo.png
-// 3) This version uses plain <img> (best for Vercel static export) and avoids next/image entirely.
 
 export default function Page() {
   return (
