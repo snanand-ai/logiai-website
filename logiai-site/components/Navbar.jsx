@@ -11,7 +11,7 @@ export default function Navbar() {
   <img
     src="/logo.png"
     alt="LogiAI"
-    className="h-9 w-auto"
+    className="h-14 md:h-16 w-auto"
   />
         </a>
 
