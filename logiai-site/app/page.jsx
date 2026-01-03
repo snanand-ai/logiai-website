@@ -5,8 +5,6 @@ export default function Page() {
         <div className="flex flex-col items-center text-center">
           {/* Logo */}
           <img src="/logo.png" alt="LogiAI" className="h-36 md:h-44 mb-6" />
-          {/* Tagline */}
-          <p className="text-sm tracking-wide text-slate-500 mb-10">Flow Forward</p>
           {/* Headline */}
           <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-slate-900">Intelligence before automation</h1>
           {/* Subheading */}
