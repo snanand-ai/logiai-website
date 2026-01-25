@@ -25,4 +25,35 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
+  .bg-size-200 {
+    background-size: 200%;
+  }
+
+  .bg-pos-0 {
+    background-position: 0%;
+  }
+
+  .bg-pos-100 {
+    background-position: 100%;
+  }
+
+  .delay-700 {
+    animation-delay: 700ms;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse {
+  animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }

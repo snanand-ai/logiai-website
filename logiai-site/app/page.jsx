@@ -2,36 +2,86 @@ export default function Page() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-white via-slate-50 to-teal/5 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(7,99,128,0.08),transparent_50%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_60%,rgba(255,197,32,0.06),transparent_50%)]"></div>
-        <div className="relative mx-auto max-w-6xl px-6 py-32 md:py-40">
+      <section className="relative min-h-[90vh] bg-gradient-to-br from-white via-slate-50/50 to-white overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 opacity-40">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-teal/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-gold/15 rounded-full blur-3xl animate-pulse delay-700"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-navy/10 rounded-full blur-3xl"></div>
+        </div>
+
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:64px_64px]"></div>
+
+        <div className="relative mx-auto max-w-7xl px-6 py-20 md:py-28">
           <div className="flex flex-col items-center text-center">
-            {/* Logo */}
-            <div className="mb-8 transform transition-all hover:scale-105">
-              <img src="/logo.png" alt="LogiAI" className="h-40 md:h-48" />
+            {/* Logo with integrated background */}
+            <div className="relative mb-12 group">
+              <div className="absolute inset-0 bg-gradient-to-r from-teal/30 via-gold/30 to-navy/30 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500 opacity-60"></div>
+              <div className="relative bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-2xl shadow-ink/10">
+                <img src="/logo.png" alt="LogiAI" className="h-32 md:h-40 relative z-10" />
+              </div>
             </div>
-            {/* Headline */}
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-ink leading-tight">
-              Intelligence before<br/>automation
-            </h1>
+
+            {/* Headline with better hierarchy */}
+            <div className="space-y-6 mb-8">
+              <div className="inline-block px-4 py-2 bg-gradient-to-r from-teal/10 to-navy/10 rounded-full border border-teal/20">
+                <span className="text-sm md:text-base font-semibold bg-gradient-to-r from-teal to-navy bg-clip-text text-transparent">
+                  Optimization Mesh for Logistics
+                </span>
+              </div>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-ink leading-[1.1]">
+                Intelligence before<br/>automation
+              </h1>
+            </div>
+
             {/* Subheading */}
-            <p className="mt-8 max-w-3xl text-xl md:text-2xl text-slate-700 leading-relaxed">
-              LogiAI is an Optimization Mesh for logistics. It pauses chaos, reasons through complexity, and guides humans to better decisions before any action is taken.
+            <p className="mt-6 max-w-3xl text-lg md:text-xl text-slate-600 leading-relaxed">
+              LogiAI pauses chaos, reasons through complexity, and guides humans to better decisions before any action is taken.
             </p>
+
+            {/* Key value props */}
+            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl">
+              <div className="flex items-center gap-3 bg-white/60 backdrop-blur rounded-xl px-5 py-3 border border-slate-200/50">
+                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-teal/10 flex items-center justify-center">
+                  <span className="text-lg">⚡</span>
+                </div>
+                <span className="text-sm font-semibold text-slate-700">Continuous Learning</span>
+              </div>
+              <div className="flex items-center gap-3 bg-white/60 backdrop-blur rounded-xl px-5 py-3 border border-slate-200/50">
+                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gold/10 flex items-center justify-center">
+                  <span className="text-lg">🎯</span>
+                </div>
+                <span className="text-sm font-semibold text-slate-700">Real-time Optimization</span>
+              </div>
+              <div className="flex items-center gap-3 bg-white/60 backdrop-blur rounded-xl px-5 py-3 border border-slate-200/50">
+                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-navy/10 flex items-center justify-center">
+                  <span className="text-lg">👥</span>
+                </div>
+                <span className="text-sm font-semibold text-slate-700">Human-in-the-Loop</span>
+              </div>
+            </div>
+
             {/* CTAs */}
-            <div className="mt-14 flex flex-col sm:flex-row gap-5">
-              <a href="#" className="group inline-flex items-center justify-center rounded-full bg-gradient-to-r from-gold to-[#FFD04D] px-12 py-4 text-base font-bold text-ink shadow-lg shadow-gold/30 hover:shadow-xl hover:shadow-gold/40 transition-all duration-200 hover:scale-105">
-                Book a demo
-                <svg className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="mt-14 flex flex-col sm:flex-row gap-4">
+              <a href="#" className="group relative inline-flex items-center justify-center rounded-full bg-gradient-to-r from-gold via-[#FFD04D] to-gold bg-size-200 bg-pos-0 hover:bg-pos-100 px-12 py-4 text-base font-bold text-ink shadow-xl shadow-gold/25 hover:shadow-2xl hover:shadow-gold/35 transition-all duration-300">
+                <span className="relative z-10">Book a demo</span>
+                <svg className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                 </svg>
               </a>
-              <a href="/product" className="inline-flex items-center justify-center rounded-full border-2 border-navy/20 bg-white/80 backdrop-blur px-12 py-4 text-base font-semibold text-ink hover:border-navy hover:bg-white transition-all duration-200 hover:scale-105 shadow-sm">
+              <a href="/product" className="inline-flex items-center justify-center rounded-full border-2 border-navy/30 bg-white/90 backdrop-blur px-12 py-4 text-base font-semibold text-ink hover:border-navy hover:bg-white hover:shadow-lg transition-all duration-300">
                 See how it works
               </a>
             </div>
           </div>
+        </div>
+
+        {/* Bottom wave transition */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" fill="white"/>
+          </svg>
         </div>
       </section>
 
