@@ -199,17 +199,62 @@ export default function Page() {
             </p>
           </div>
 
-          {/* OM Diagram - Simplified representation */}
+          {/* OM Diagram - 6 Layer Circular Architecture */}
           <div className="mb-20 flex justify-center">
-            <div className="relative w-full max-w-md">
-              <div className="absolute inset-0 bg-gradient-to-br from-gold/10 to-teal/10 rounded-full blur-3xl"></div>
-              <div className="relative bg-white rounded-full p-8 border-2 border-gold/30 aspect-square flex items-center justify-center">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-gold mb-2">Optimisation</div>
-                  <div className="text-lg font-semibold text-navy">Mesh</div>
-                  <div className="mt-4 text-sm text-slate-600">6-Layer Architecture</div>
-                </div>
-              </div>
+            <div className="relative w-full max-w-2xl">
+              <svg viewBox="0 0 600 600" className="w-full h-full">
+                {/* Outer dashed circle */}
+                <circle cx="300" cy="300" r="240" fill="none" stroke="#E2E8F0" strokeWidth="2" strokeDasharray="8,8" />
+
+                {/* Inner circles */}
+                <circle cx="300" cy="300" r="180" fill="none" stroke="#CBD5E1" strokeWidth="1" />
+                <circle cx="300" cy="300" r="120" fill="none" stroke="#CBD5E1" strokeWidth="1" />
+
+                {/* Center golden circle */}
+                <circle cx="300" cy="300" r="80" fill="#FFC520" fillOpacity="0.15" stroke="#FFC520" strokeWidth="3" />
+
+                {/* Connection lines from center */}
+                <line x1="300" y1="300" x2="300" y2="80" stroke="#CBD5E1" strokeWidth="1" />
+                <line x1="300" y1="300" x2="507" y2="180" stroke="#CBD5E1" strokeWidth="1" />
+                <line x1="300" y1="300" x2="507" y2="420" stroke="#CBD5E1" strokeWidth="1" />
+                <line x1="300" y1="300" x2="300" y2="520" stroke="#CBD5E1" strokeWidth="1" />
+                <line x1="300" y1="300" x2="93" y2="420" stroke="#CBD5E1" strokeWidth="1" />
+                <line x1="300" y1="300" x2="93" y2="180" stroke="#CBD5E1" strokeWidth="1" />
+
+                {/* Center text */}
+                <text x="300" y="290" textAnchor="middle" className="text-2xl font-bold fill-gold">Optimisation</text>
+                <text x="300" y="315" textAnchor="middle" className="text-lg font-semibold fill-navy">Mesh</text>
+
+                {/* Layer nodes with labels - Optimise (top) */}
+                <circle cx="300" cy="60" r="28" fill="#FFC520" stroke="#013B5F" strokeWidth="3" />
+                <circle cx="300" cy="60" r="15" fill="#FFC520" />
+                <text x="300" y="40" textAnchor="middle" className="text-sm font-semibold fill-navy">Optimise</text>
+
+                {/* Execute (top right) */}
+                <circle cx="507" cy="150" r="28" fill="#FFC520" stroke="#013B5F" strokeWidth="3" />
+                <circle cx="507" cy="150" r="15" fill="#FFC520" />
+                <text x="540" y="125" textAnchor="start" className="text-sm font-semibold fill-navy">Execute</text>
+
+                {/* Understand (bottom right) */}
+                <circle cx="507" cy="450" r="28" fill="#FFC520" stroke="#013B5F" strokeWidth="3" />
+                <circle cx="507" cy="450" r="15" fill="#FFC520" />
+                <text x="540" y="455" textAnchor="start" className="text-sm font-semibold fill-navy">Understand</text>
+
+                {/* Retrieve (bottom) */}
+                <circle cx="300" cy="540" r="28" fill="#FFC520" stroke="#013B5F" strokeWidth="3" />
+                <circle cx="300" cy="540" r="15" fill="#FFC520" />
+                <text x="300" y="570" textAnchor="middle" className="text-sm font-semibold fill-navy">Retrieve</text>
+
+                {/* Reason (bottom left) */}
+                <circle cx="93" cy="450" r="28" fill="#FFC520" stroke="#013B5F" strokeWidth="3" />
+                <circle cx="93" cy="450" r="15" fill="#FFC520" />
+                <text x="60" y="455" textAnchor="end" className="text-sm font-semibold fill-navy">Reason</text>
+
+                {/* Learn (top left) */}
+                <circle cx="93" cy="150" r="28" fill="#FFC520" stroke="#013B5F" strokeWidth="3" />
+                <circle cx="93" cy="150" r="15" fill="#FFC520" />
+                <text x="60" y="125" textAnchor="end" className="text-sm font-semibold fill-navy">Learn</text>
+              </svg>
             </div>
           </div>
 
