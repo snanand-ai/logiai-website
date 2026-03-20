@@ -2,6 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-:root { color-scheme: light; }
-html, body { height: 100%; }
-body { @apply bg-white text-ink antialiased; }
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  @apply bg-white text-ink antialiased;
+  font-feature-settings: 'kern' 1, 'liga' 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .bg-size-200 {
+    background-size: 200%;
+  }
+
+  .bg-pos-0 {
+    background-position: 0%;
+  }
+
+  .bg-pos-100 {
+    background-position: 100%;
+  }
+
+  .delay-700 {
+    animation-delay: 700ms;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse {
+  animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
