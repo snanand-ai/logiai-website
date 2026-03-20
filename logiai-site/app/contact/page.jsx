@@ -9,7 +9,7 @@ export default function Contact() {
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold text-ink mb-6">Get In Touch</h1>
             <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
-              Share your workflows and systems. We'll map OM to your pricing, operations and finance decisions.
+              Share your workflows and systems. We will map OM to your pricing, operations and finance decisions.
             </p>
           </div>
 
@@ -52,7 +52,7 @@ export default function Contact() {
                   Send Message
                 </button>
                 <div className="text-xs text-slate-500 text-center">
-                  This form connects to our team. We'll respond within 24 hours.
+                  This form connects to our team. We will respond within 24 hours.
                 </div>
               </form>
             </div>

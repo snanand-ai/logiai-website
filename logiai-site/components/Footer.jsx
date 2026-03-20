@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div>
             <div className="text-sm font-bold">LogiAI</div>
-            <div className="mt-1 text-sm text-ink/60">OM — The Optimization Mesh for Logistics (Humans always in control).</div>
+            <div className="mt-1 text-sm text-ink/60">OM - The Optimization Mesh for Logistics (Humans always in control).</div>
           </div>
           <div className="flex gap-6 text-sm text-ink/70">
             <a href="/privacy" className="hover:text-ink">Privacy</a>

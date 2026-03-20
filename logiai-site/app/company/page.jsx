@@ -28,16 +28,16 @@ export default function Company() {
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="space-y-6 text-lg text-slate-700 leading-relaxed">
                 <p className="text-xl font-semibold text-ink">
-                  We didn't start with AI. We started with a simple observation:
+                  We did not start with AI. We started with a simple observation:
                 </p>
                 <p>
-                  <span className="font-bold text-ink">The same decisions were being made over and over — and forgotten every time.</span>
+                  <span className="font-bold text-ink">The same decisions were being made over and over and forgotten every time.</span>
                 </p>
                 <p>
-                  Documents were the entry point because that's where intent first appears. But automation was never the destination.
+                  Documents were the entry point because that is where intent first appears. But automation was never the destination.
                 </p>
                 <p>
-                  The destination was <span className="font-semibold text-gold">intelligence that remembers, learns, and compounds</span> — and stays inside the company even when people leave.
+                  The destination was <span className="font-semibold text-gold">intelligence that remembers, learns and compounds</span>. It stays inside the company even when people leave.
                 </p>
               </div>
               <HITLCallout />
@@ -58,8 +58,8 @@ export default function Company() {
                 <div>
                   <h2 className="text-2xl md:text-3xl font-bold text-ink mb-4">The Origin of Intelligence</h2>
                   <p className="text-lg text-slate-600 leading-relaxed">
-                    <span className="font-bold text-ink">OM</span> stands for Optimization Mesh, and it also represents the origin of intelligence inside logistics:
-                    where signals become context, context becomes options, humans choose the decision, execution follows, and outcomes reinforce learning.
+                    <span className="font-bold text-ink">OM</span> stands for Optimization Mesh and it also represents the origin of intelligence inside logistics:
+                    where signals become context, context becomes options, humans choose the decision, execution follows and outcomes reinforce learning.
                   </p>
                 </div>
               </div>
@@ -126,7 +126,7 @@ export default function Company() {
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Join us in building the future of logistics</h2>
             <p className="text-xl text-white/90 mb-10">
-              We're working with forward-thinking logistics companies to deploy OM.
+              We are working with forward-thinking logistics companies to deploy OM.
             </p>
             <a href="/contact" className="inline-flex items-center justify-center gap-2 bg-gold hover:bg-gold/90 text-ink font-bold px-10 py-4 rounded-xl transition-all duration-200 hover:scale-105 shadow-xl">
               Get in Touch

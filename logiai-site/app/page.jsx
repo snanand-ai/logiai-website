@@ -62,7 +62,7 @@ export default function Page() {
               The World Is Building AI For Automation.
             </h2>
             <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto">
-              Global trade runs on human interpretation—not systems.
+              Global trade runs on human interpretation, not systems.
             </p>
           </div>
 
@@ -344,7 +344,7 @@ export default function Page() {
               The Hidden Behaviour System
             </h2>
             <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
-              Real signals live inside daily communication—invisible to traditional systems.
+              Real signals live inside daily communication. Invisible to traditional systems.
             </p>
           </div>
 

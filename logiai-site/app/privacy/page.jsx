@@ -11,7 +11,7 @@ export default function Privacy() {
           <h2 className="text-xl font-semibold text-ink mb-3">Overview</h2>
           <p>
             LogiAI is committed to protecting your privacy and ensuring the security of your data.
-            This Privacy Policy explains how we collect, use, and protect information when you use our services.
+            This Privacy Policy explains how we collect, use and protect information when you use our services.
           </p>
         </section>
 
@@ -33,8 +33,8 @@ export default function Privacy() {
             <li>Provide and optimize OM services for your logistics operations</li>
             <li>Learn and improve recommendations over time</li>
             <li>Provide analytics and insights to your team</li>
-            <li>Ensure security, prevent fraud, and comply with legal obligations</li>
-            <li>Communicate with you about services, updates, and support</li>
+            <li>Ensure security, prevent fraud and comply with legal obligations</li>
+            <li>Communicate with you about services, updates and support</li>
           </ul>
         </section>
 
@@ -42,7 +42,7 @@ export default function Privacy() {
           <h2 className="text-xl font-semibold text-ink mb-3">Data Security</h2>
           <p>
             We implement industry-standard security measures to protect your data, including encryption
-            in transit and at rest, access controls, and regular security audits. Your data is isolated
+            in transit and at rest, access controls and regular security audits. Your data is isolated
             and accessible only to authorized personnel within your organization.
           </p>
         </section>

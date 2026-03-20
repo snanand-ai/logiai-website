@@ -41,7 +41,7 @@ const USE_CASES = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
       </svg>
     ),
-    optimize: "Detect leakage, anomalies, and recoverable disputes",
+    optimize: "Detect leakage, anomalies and recoverable disputes",
     human: "Approve write-offs, dispute actions and policy limits",
     automate: "Match charges, flag variances, create evidence packs"
   },
@@ -178,7 +178,7 @@ export default function UseCases() {
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Ready to see your use case?</h2>
             <p className="text-xl text-white/90 mb-10">
-              Every logistics operation is unique. Let's discuss how OM applies to your specific workflows.
+              Every logistics operation is unique. Let us discuss how OM applies to your specific workflows.
             </p>
             <a href="/contact" className="inline-flex items-center justify-center gap-2 bg-gold hover:bg-gold/90 text-ink font-bold px-10 py-4 rounded-xl transition-all duration-200 hover:scale-105 shadow-xl">
               Schedule a Conversation
