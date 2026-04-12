@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="LogiAI — Behavior Driven Decision Infrastructure for Logistics. The intelligence layer for global trade. Flow Forward." />
+  <meta name="keywords" content="logistics AI, freight optimization, supply chain intelligence, optimization mesh, freight forwarding AI" />
+  <meta property="og:title" content="LogiAI — The Intelligence Layer for Global Logistics" />
+  <meta property="og:description" content="Behavior Driven Decision Infrastructure for Logistics. Flow Forward." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://snanand-ai.github.io/logiai-website/" />
+  <title>LogiAI — The Intelligence Layer for Global Logistics</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    /* Page-specific additions */
+    .hero { background: linear-gradient(160deg, #faf8f3 60%, #fff5e8 100%); }
+  </style>
+</head>
+<body>
+
+<!-- ===================== NAVIGATION ===================== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg class="logo-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="8" cy="8" r="3.5" fill="#1e3a5f"/>
+        <circle cx="8" cy="24" r="3.5" fill="#ff8c42"/>
+        <circle cx="8" cy="40" r="3.5" fill="#ffc93c"/>
+        <circle cx="24" cy="16" r="3.5" fill="#1e3a5f"/>
+        <circle cx="24" cy="32" r="3.5" fill="#1e3a5f"/>
+        <circle cx="40" cy="24" r="4.5" fill="#ff8c42"/>
+        <line x1="11.5" y1="8" x2="20.5" y2="16" stroke="#1e3a5f" stroke-width="2" stroke-linecap="round"/>
+        <line x1="11.5" y1="24" x2="20.5" y2="16" stroke="#1e3a5f" stroke-width="2" stroke-linecap="round"/>
+        <line x1="11.5" y1="24" x2="20.5" y2="32" stroke="#ff8c42" stroke-width="2" stroke-linecap="round"/>
+        <line x1="11.5" y1="40" x2="20.5" y2="32" stroke="#ffc93c" stroke-width="2" stroke-linecap="round"/>
+        <line x1="27.5" y1="16" x2="35.5" y2="24" stroke="#ff8c42" stroke-width="2" stroke-linecap="round"/>
+        <line x1="27.5" y1="32" x2="35.5" y2="24" stroke="#ff8c42" stroke-width="2" stroke-linecap="round"/>
+        <polygon points="38,20 44,24 38,28" fill="#ff8c42"/>
+      </svg>
+      <div class="logo-text-wrap">
+        <span class="logo-name"><span class="logi">Logi</span><span class="ai">AI</span></span>
+        <span class="logo-tagline">Flow Forward</span>
+      </div>
+    </a>
+
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <div class="nav-cta">
+      <a href="contact.html" class="btn btn-primary">Request Demo</a>
+    </div>
+
+    <button class="nav-hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav-mobile">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html" class="btn btn-primary" style="margin-top:8px; text-align:center;">Request Demo</a>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="hero-bg-shape"></div>
+  <div class="hero-bg-shape-2"></div>
+
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge" data-reveal>
+        <span class="hero-badge-dot"></span>
+        Behavior Driven Decision Infrastructure
+      </div>
+
+      <h1 data-reveal data-delay="1">
+        The Intelligence Layer for
+        <span class="gradient-text">Global Logistics</span>
+      </h1>
+
+      <p class="hero-sub" data-reveal data-delay="2">
+        Every shipment hides critical decision signals. Buyer psychology, margin elasticity,
+        carrier reliability patterns — buried in emails no system captures. LogiAI changes that.
+      </p>
+
+      <div class="hero-actions" data-reveal data-delay="3">
+        <a href="contact.html" class="btn btn-primary btn-lg">Request Early Access</a>
+        <a href="about.html" class="btn btn-outline btn-lg">Our Story</a>
+      </div>
+    </div>
+
+    <div class="hero-visual" data-reveal="right" data-delay="2">
+      <div class="hero-card">
+        <div class="hero-stat">
+          <div class="hero-stat-number">0%</div>
+          <div class="hero-stat-label">of critical logistics intelligence is currently captured</div>
+        </div>
+        <div class="hero-signals">
+          <div class="hero-signal-item">Buyer Psychology</div>
+          <div class="hero-signal-item">Lane Behaviour</div>
+          <div class="hero-signal-item">Margin Elasticity</div>
+          <div class="hero-signal-item">Reliability Patterns</div>
+          <div class="hero-signal-item">Exception Probability</div>
+          <div class="hero-signal-item">Seasonality</div>
+          <div class="hero-signal-item">Tone Sensitivity</div>
+          <div class="hero-signal-item">Operator Habits</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROBLEM — Hidden Behaviour System ===================== -->
+<section class="signals-section">
+  <div class="container">
+    <div class="section-header" data-reveal>
+      <span class="section-label">The Problem</span>
+      <h2 class="section-title">The Hidden Behaviour System That Controls Global Logistics Has Never Been Modelled</h2>
+      <p class="section-subtitle">Every critical decision stems from signals buried in daily conversations — signals that no TMS, ERP, or AI agent can capture.</p>
+    </div>
+
+    <div class="signals-intro" data-reveal>
+      <p>Daily workflows hide massive signals that could transform operations if captured and analyzed. The intelligence exists in every email, every negotiation, every delay, every exception. But today, companies throw away this gold mine of optimization potential.</p>
+    </div>
+
+    <div class="signals-grid">
+      <div class="signal-card" data-reveal data-delay="1">
+        <h4>Buyer Psychology</h4>
+        <p>Decision patterns and negotiation signals embedded in communication</p>
+      </div>
+      <div class="signal-card" data-reveal data-delay="2">
+        <h4>Lane Behaviour</h4>
+        <p>Route performance and capacity fluctuations across corridors</p>
+      </div>
+      <div class="signal-card" data-reveal data-delay="3">
+        <h4>Margin Elasticity</h4>
+        <p>Real-time pricing sensitivity and competitive dynamics</p>
+      </div>
+      <div class="signal-card" data-reveal data-delay="4">
+        <h4>Reliability Patterns</h4>
+        <p>Carrier performance trends and failure prediction signals</p>
+      </div>
+      <div class="signal-card" data-reveal data-delay="1">
+        <h4>Exception Probability</h4>
+        <p>Risk indicators hidden in historical operations data</p>
+      </div>
+      <div class="signal-card" data-reveal data-delay="2">
+        <h4>Seasonality</h4>
+        <p>Demand cycles and capacity constraints across time periods</p>
+      </div>
+      <div class="signal-card" data-reveal data-delay="3">
+        <h4>Tone Sensitivity</h4>
+        <p>Emotional signals in stakeholder communication</p>
+      </div>
+      <div class="signal-card" data-reveal data-delay="4">
+        <h4>Operator Habits</h4>
+        <p>Individual decision patterns and workflow preferences</p>
+      </div>
+    </div>
+
+    <div class="insight-callout" data-reveal>
+      <svg class="insight-callout-icon" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+      </svg>
+      <p>This is the largest unmodelled decision system in the supply chain. The next category winner will not automate workflows. It will model the intelligence behind them. <strong>LogiAI does exactly this.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== STATS — 0% Captured ===================== -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-inner">
+      <div class="stats-left" data-reveal="left">
+        <h2>Every Interaction Equals Lost Intelligence</h2>
+        <p>Today, zero percent of this intelligence is captured, analyzed, or used to improve future decisions. This represents a trillion-dollar blind spot in global logistics operations.</p>
+
+        <div class="data-tags" style="margin-top: 32px;">
+          <span class="data-tag">Customer Buying Patterns</span>
+          <span class="data-tag">Carrier Reliability</span>
+          <span class="data-tag">Lane & Seasonality Risk</span>
+          <span class="data-tag">Margin Corridors</span>
+          <span class="data-tag">Delay Likelihood</span>
+          <span class="data-tag">Escalation Triggers</span>
+          <span class="data-tag">Tone Preferences</span>
+          <span class="data-tag">SLA Behaviors</span>
+          <span class="data-tag">Exception Root Causes</span>
+          <span class="data-tag">Dispute Patterns</span>
+        </div>
+      </div>
+
+      <div class="zero-stat" data-reveal="right">
+        <div class="zero-number">0%</div>
+        <div class="zero-label">Intelligence Captured</div>
+        <div class="zero-sub">Every email, quote, and negotiation vanishes into operational history — never modeled, never learned from, never optimized.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== THE INSIGHT ===================== -->
+<section style="background: var(--cream); padding: 100px 0;">
+  <div class="container">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <div data-reveal>
+        <span class="section-label">The Insight</span>
+        <h2 class="section-title" style="font-style: italic;">Logistics is not a workflow problem.<br>It is an optimization problem.</h2>
+      </div>
+
+      <div data-reveal data-delay="1" style="margin: 40px 0;">
+        <p class="lead">Every shipment represents a complex decision with multiple tradeoffs that must be balanced:</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 16px; margin: 32px 0;" data-reveal data-delay="2">
+        <div style="display: flex; gap: 16px; align-items: flex-start; padding: 20px; background: var(--white); border-radius: 12px; border: 1px solid var(--border);">
+          <span style="color: var(--orange); font-weight: 800; font-size: 1.1rem; flex-shrink: 0;">01</span>
+          <div><strong style="color: var(--navy);">Price vs Win Probability</strong> — Quote too high and lose the business; quote too low and destroy margin</div>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: flex-start; padding: 20px; background: var(--white); border-radius: 12px; border: 1px solid var(--border);">
+          <span style="color: var(--orange); font-weight: 800; font-size: 1.1rem; flex-shrink: 0;">02</span>
+          <div><strong style="color: var(--navy);">Margin vs Service Level</strong> — Premium service costs more but builds customer loyalty</div>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: flex-start; padding: 20px; background: var(--white); border-radius: 12px; border: 1px solid var(--border);">
+          <span style="color: var(--orange); font-weight: 800; font-size: 1.1rem; flex-shrink: 0;">03</span>
+          <div><strong style="color: var(--navy);">Speed vs Cost</strong> — Express delivery commands higher rates but reduces carrier options</div>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: flex-start; padding: 20px; background: var(--white); border-radius: 12px; border: 1px solid var(--border);">
+          <span style="color: var(--orange); font-weight: 800; font-size: 1.1rem; flex-shrink: 0;">04</span>
+          <div><strong style="color: var(--navy);">Risk vs Reliability</strong> — Established carriers cost more but reduce operational risk</div>
+        </div>
+      </div>
+
+      <div data-reveal data-delay="3" style="border-left: 4px solid var(--orange); padding: 20px 28px; background: var(--white); border-radius: 0 12px 12px 0;">
+        <p style="color: var(--text); font-weight: 600; font-size: 1rem;"><strong>This is the largest unoptimized decision system in global commerce.</strong> The opportunity is not just incremental — it is transformational.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SOLUTION — What is LogiAI-OM ===================== -->
+<section class="solution-section">
+  <div class="container">
+    <div class="solution-inner">
+      <div data-reveal="left">
+        <span class="section-label">The Solution</span>
+        <h2 class="section-title">What is LogiAI-OM?</h2>
+        <p style="font-size: 1.05rem; color: var(--text-muted); margin-bottom: 36px; line-height: 1.7;">
+          LogiAI is not automation software. LogiAI is an <strong style="color: var(--navy);">Optimization Mesh (OM)</strong> — an intelligence layer that reads, understands, learns, and optimizes from every logistics interaction.
+        </p>
+
+        <div class="om-features">
+          <div class="om-feature">
+            <div class="om-feature-icon">📄</div>
+            <div class="om-feature-text">
+              <h4>Reads Every RFQ, Email & Document</h4>
+              <p>Ingests unstructured data from all communication channels and legacy systems</p>
+            </div>
+          </div>
+          <div class="om-feature">
+            <div class="om-feature-icon">🧠</div>
+            <div class="om-feature-text">
+              <h4>Understands Commercial & Operational Context</h4>
+              <p>Extracts meaning, relationships and decision variables from messy real-world data</p>
+            </div>
+          </div>
+          <div class="om-feature">
+            <div class="om-feature-icon">📈</div>
+            <div class="om-feature-text">
+              <h4>Learns from Outcomes</h4>
+              <p>Tracks what happened after each decision to build predictive understanding</p>
+            </div>
+          </div>
+          <div class="om-feature">
+            <div class="om-feature-icon">⚡</div>
+            <div class="om-feature-text">
+              <h4>Optimizes Future Decisions</h4>
+              <p>Recommends actions that maximize win rate and margin simultaneously</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="om-tagline">
+          <p>Spotify's algorithm, applied to supply chains. Netflix's engine, built for freight. <span>Intelligence that compounds with every transaction.</span></p>
+        </div>
+      </div>
+
+      <div data-reveal="right">
+        <div style="background: var(--white); border-radius: 20px; padding: 48px; border: 1px solid var(--border); box-shadow: var(--shadow-lg);">
+          <h3 style="font-size: 1.3rem; color: var(--navy); margin-bottom: 32px; text-align: center;">The World Model</h3>
+          <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 28px; text-align: center; line-height: 1.7;">OM builds a dynamic world model of logistics behavior — a living, breathing representation of how global trade actually works.</p>
+
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="background: var(--cream); border-radius: 12px; padding: 20px 24px; border: 1px solid var(--border);">
+              <h5 style="color: var(--navy); font-size: 0.95rem; margin-bottom: 4px;">Buyer Price Sensitivity</h5>
+              <p style="font-size: 0.82rem; color: var(--text-muted);">Which customers prioritize cost vs speed, how they respond to price changes, seasonal demand patterns</p>
+            </div>
+            <div style="background: var(--cream); border-radius: 12px; padding: 20px 24px; border: 1px solid var(--border);">
+              <h5 style="color: var(--navy); font-size: 0.95rem; margin-bottom: 4px;">Lane Volatility Patterns</h5>
+              <p style="font-size: 0.82rem; color: var(--text-muted);">Routes prone to disruption, seasonal capacity constraints, geopolitical impact zones</p>
+            </div>
+            <div style="background: var(--cream); border-radius: 12px; padding: 20px 24px; border: 1px solid var(--border);">
+              <h5 style="color: var(--navy); font-size: 0.95rem; margin-bottom: 4px;">Carrier Reliability Under Pressure</h5>
+              <p style="font-size: 0.82rem; color: var(--text-muted);">Performance during peak seasons, failure modes, recovery capabilities</p>
+            </div>
+            <div style="background: var(--cream); border-radius: 12px; padding: 20px 24px; border: 1px solid var(--border);">
+              <h5 style="color: var(--navy); font-size: 0.95rem; margin-bottom: 4px;">Margin Elasticity by Customer</h5>
+              <p style="font-size: 0.82rem; color: var(--text-muted);">How much pricing flexibility exists with each relationship, optimal quote ranges</p>
+            </div>
+          </div>
+
+          <div style="margin-top: 24px; background: rgba(255,140,66,0.08); border-radius: 10px; padding: 16px 20px; border: 1px solid rgba(255,140,66,0.2);">
+            <p style="font-size: 0.85rem; font-weight: 600; color: var(--navy);">🚢 Freight forwarding is the entry point — the Trojan horse. The model extends naturally to ports, shipping lines, airlines, warehouses and every node in the supply chain.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HOW IT WORKS ===================== -->
+<section class="how-section">
+  <div class="container">
+    <div class="section-header text-center" data-reveal>
+      <span class="section-label">How It Works</span>
+      <h2 class="section-title">Input → OM Core → Output</h2>
+      <p class="section-subtitle">A simple three-stage flow that transforms messy logistics reality into optimized decisions — and gets smarter with every transaction.</p>
+    </div>
+
+    <div class="how-flow">
+      <div class="how-step" data-reveal>
+        <div class="how-step-num">1</div>
+        <div class="how-step-content">
+          <div class="how-step-label">Input</div>
+          <h4>The Unstructured Reality</h4>
+          <p style="color: var(--text-muted); margin-bottom: 14px;">Messy RFQs, email threads, pricing sheets, operational actions — the unstructured reality of logistics communication.</p>
+        </div>
+      </div>
+
+      <div class="how-step" data-reveal data-delay="1">
+        <div class="how-step-num">2</div>
+        <div class="how-step-content">
+          <div class="how-step-label">OM Core</div>
+          <h4>Intelligence Processing</h4>
+          <div class="how-step-bullets">
+            <div class="how-bullet">Understands context and intent</div>
+            <div class="how-bullet">Builds institutional memory</div>
+            <div class="how-bullet">Runs multi-objective optimization</div>
+            <div class="how-bullet">Learns continuously from outcomes</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="how-step" data-reveal data-delay="2">
+        <div class="how-step-num">3</div>
+        <div class="how-step-content" style="padding-bottom: 0;">
+          <div class="how-step-label">Output</div>
+          <h4>Optimized Decisions</h4>
+          <div class="how-step-bullets">
+            <div class="how-bullet">Optimal quote price</div>
+            <div class="how-bullet">Best routing and carrier selection</div>
+            <div class="how-bullet">Confidence score for every decision</div>
+            <div class="how-bullet">Recommended action with reasoning</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="compounding-box" data-reveal style="max-width: 700px; margin: 48px auto 0;">
+      <p>⚡ <strong>The compounding effect:</strong> Every decision improves the next one. The system becomes more accurate, more valuable and more indispensable with each transaction processed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== INTELLIGENCE LOOP ===================== -->
+<section class="loop-section">
+  <div class="container">
+    <div class="section-header text-center" data-reveal>
+      <span class="section-label">The Moat</span>
+      <h2 class="section-title">The Intelligence Loop</h2>
+      <p class="section-subtitle">OM runs a closed loop that creates a defensible, compounding advantage. A learning system that gets smarter with scale.</p>
+    </div>
+
+    <div class="loop-grid">
+      <div class="loop-card" data-reveal data-delay="1">
+        <div class="loop-card-icon">👁️</div>
+        <h4>Understand</h4>
+        <p>Parse intent from unstructured communications</p>
+      </div>
+      <div class="loop-card" data-reveal data-delay="2">
+        <div class="loop-card-icon">📚</div>
+        <h4>Learn</h4>
+        <p>Extract patterns from historical outcomes</p>
+      </div>
+      <div class="loop-card" data-reveal data-delay="3">
+        <div class="loop-card-icon">🗄️</div>
+        <h4>Retrieve</h4>
+        <p>Access relevant context from memory</p>
+      </div>
+      <div class="loop-card" data-reveal data-delay="4">
+        <div class="loop-card-icon">💡</div>
+        <h4>Reason</h4>
+        <p>Model tradeoffs and scenarios</p>
+      </div>
+      <div class="loop-card" data-reveal data-delay="5">
+        <div class="loop-card-icon">⚙️</div>
+        <h4>Optimize</h4>
+        <p>Generate optimal recommendations</p>
+      </div>
+      <div class="loop-card" data-reveal data-delay="6">
+        <div class="loop-card-icon">🚀</div>
+        <h4>Execute</h4>
+        <p>Take action and capture feedback</p>
+      </div>
+    </div>
+
+    <div class="loop-comparison" data-reveal>
+      <div class="loop-compare-item">
+        <div class="company">Netflix</div>
+        <p>learned what you watch</p>
+      </div>
+      <div class="loop-compare-item">
+        <div class="company">TikTok</div>
+        <p>learned how you react</p>
+      </div>
+      <div class="loop-compare-item">
+        <div class="company" style="color: var(--orange);">OM</div>
+        <p>learns how logistics behaves</p>
+      </div>
+      <div class="loop-flywheel-note">
+        This loop compounds with every shipment. More data means better predictions. Better predictions mean more adoption. More adoption means more data. It's a flywheel that accelerates over time.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PATTERN — Why Inevitable ===================== -->
+<section class="pattern-section">
+  <div class="container">
+    <div class="section-header" data-reveal>
+      <span class="section-label">The Pattern</span>
+      <h2 class="section-title">Why This Is Inevitable</h2>
+      <p class="section-subtitle">Every major industry hit a ceiling until intelligence arrived to unlock exponential value. The pattern is clear — and logistics is next.</p>
+    </div>
+
+    <div class="pattern-grid">
+      <div class="pattern-card" data-reveal data-delay="1">
+        <div class="pattern-card-name">Netflix</div>
+        <p>Built a recommendation engine that optimized content delivery to individual preferences, creating billions in value.</p>
+      </div>
+      <div class="pattern-card" data-reveal data-delay="2">
+        <div class="pattern-card-name">TikTok</div>
+        <p>Built an optimization loop that learned user behavior patterns at scale, dominating attention across the globe.</p>
+      </div>
+      <div class="pattern-card" data-reveal data-delay="3">
+        <div class="pattern-card-name">Amazon</div>
+        <p>Optimized demand forecasting, dynamic pricing and fulfillment networks with machine intelligence at massive scale.</p>
+      </div>
+    </div>
+
+    <div class="pattern-cta-note" data-reveal>
+      <p><span>Logistics is the next frontier.</span> Global trade has software for tracking and documentation. It does not have intelligence for decision-making. The companies that deploy optimization at scale will define the category.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LOW MARGIN ===================== -->
+<section class="margin-section">
+  <div class="container">
+    <div class="section-header" data-reveal>
+      <span class="section-label">Why It Works</span>
+      <h2 class="section-title">Built for Low-Margin Industries</h2>
+      <p class="section-subtitle">Conventional wisdom says low-margin industries can't afford expensive technology. <strong>The opposite is true.</strong> Low margins amplify the value of intelligence.</p>
+    </div>
+
+    <div class="margin-grid">
+      <div class="margin-card" data-reveal data-delay="1">
+        <div class="margin-card-icon">🔍</div>
+        <h4>Small Gains Matter More</h4>
+        <p>When operating on 3–5% margins, recovering even 50 basis points represents a 10–15% increase in profit.</p>
+        <div class="tagline">Precision becomes paramount.</div>
+      </div>
+      <div class="margin-card" data-reveal data-delay="2">
+        <div class="margin-card-icon">⚠️</div>
+        <h4>Errors Are Expensive</h4>
+        <p>A single mispriced quote can eliminate the profit from ten successful shipments. The cost of error is asymmetric.</p>
+        <div class="tagline">The cost of error is asymmetric.</div>
+      </div>
+      <div class="margin-card" data-reveal data-delay="3">
+        <div class="margin-card-icon">👤</div>
+        <h4>Experience Doesn't Scale</h4>
+        <p>Expert operators are scarce and expensive. Their knowledge stays locked in their heads — creating bottlenecks and fragility.</p>
+        <div class="tagline">Creates bottlenecks and fragility.</div>
+      </div>
+    </div>
+
+    <div class="margin-insight" data-reveal>
+      <p>OM does not fight margin pressure. It exploits it. Every recovered basis point compounds across volume. A 1% margin improvement on $100M in annual shipments equals <strong style="color: var(--yellow);">$1M in pure profit</strong> with no increase in operational cost.</p>
+    </div>
+
+    <div style="margin-top: 32px; padding: 28px 32px; background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); text-align: center;" data-reveal>
+      <p style="font-weight: 700; color: var(--navy); font-size: 1.05rem;">High-margin industries can tolerate inefficiency. Low-margin industries <em>require</em> optimization to survive.</p>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 8px;">We optimize human judgment from unstructured workflows.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== VALIDATED BY ===================== -->
+<section class="validated-section compact">
+  <div class="container">
+    <div class="section-header text-center" data-reveal>
+      <span class="section-label">Validated By</span>
+      <h2 class="section-title" style="font-size: 1.8rem;">Backed by the World's Leading Technology Programs</h2>
+    </div>
+
+    <div class="validated-logos">
+      <div class="validated-badge" data-reveal data-delay="1">
+        <div class="validated-badge-icon" style="background: #f0f4ff;">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="8" fill="#f0f4ff"/>
+            <text x="4" y="22" font-size="18" font-weight="800" fill="#1e3a5f">MS</text>
+          </svg>
+        </div>
+        <div class="validated-badge-name">Microsoft<br>Startups</div>
+      </div>
+      <div class="validated-badge" data-reveal data-delay="2">
+        <div class="validated-badge-icon" style="background: #f0fff4;">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="8" fill="#e8ffe0"/>
+            <text x="4" y="22" font-size="14" font-weight="800" fill="#1a7a00">NV</text>
+          </svg>
+        </div>
+        <div class="validated-badge-name">NVIDIA<br>Inception</div>
+      </div>
+      <div class="validated-badge" data-reveal data-delay="3">
+        <div class="validated-badge-icon" style="background: #fff8f0;">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="8" fill="#fff0e0"/>
+            <text x="3" y="22" font-size="14" font-weight="800" fill="#f57c00">G4S</text>
+          </svg>
+        </div>
+        <div class="validated-badge-name">Google for<br>Startups</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FINAL CTA ===================== -->
+<section class="cta-section">
+  <div class="cta-bg"></div>
+  <div class="container">
+    <div class="cta-inner" data-reveal>
+      <h2>Let's Build Something Inevitable Together</h2>
+      <p>The intelligence layer for global logistics is being built right now. Join us at the beginning of something transformational.</p>
+      <div class="cta-actions">
+        <a href="contact.html" class="btn btn-primary btn-lg">Request Early Access</a>
+        <a href="about.html" class="btn btn-outline-white btn-lg">Meet the Founder</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo-text-wrap">
+          <span class="logo-name"><span class="logi">Logi</span><span class="ai" style="color: var(--orange);">AI</span></span>
+          <span class="logo-tagline" style="color: rgba(255,255,255,0.4);">Flow Forward</span>
+        </div>
+        <p class="footer-tagline">Behavior Driven Decision Infrastructure for Logistics. The intelligence layer for global trade.</p>
+      </div>
+
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <div class="footer-col">
+        <h5>Connect</h5>
+        <a href="mailto:sachin@logiai.co">sachin@logiai.co</a>
+        <a href="https://linkedin.com/in/sachinanand" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="tel:+6585053976">+65 8505 3976</a>
+        <a href="contact.html">Request Demo</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 LogiAI Pte. Ltd. Singapore. All rights reserved.</p>
+      <p>Behavior Driven Decision Infrastructure for Logistics</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
