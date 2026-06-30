@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Live Spanish to English voice translator — speak in Spanish and hear it in English instantly." />
+  <title>Live Translator — Spanish → English</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+  <style>
+    :root {
+      --navy:        #1e3a5f;
+      --navy-light:  #2a4f7f;
+      --orange:      #ff8c42;
+      --yellow:      #ffc93c;
+      --cream:       #faf8f3;
+      --white:       #ffffff;
+      --text:        #2c2c2c;
+      --text-muted:  #6b7280;
+      --border:      #e5e0d8;
+      --radius:      12px;
+      --radius-lg:   20px;
+      --shadow-md:   0 8px 32px rgba(30,58,95,0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(160deg, var(--cream) 50%, #fff5e8 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem 3rem;
+    }
+    .brand {
+      display: flex; align-items: center; gap: .5rem;
+      font-weight: 700; font-size: 1.25rem; margin-bottom: 1.5rem;
+      text-decoration: none;
+    }
+    .brand .logi { color: var(--navy); }
+    .brand .ai   { color: var(--orange); }
+    h1 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      color: var(--navy); text-align: center; line-height: 1.2;
+    }
+    .sub { color: var(--text-muted); margin: .6rem 0 1.8rem; text-align: center; }
+    .card {
+      background: var(--white);
+      width: 100%; max-width: 560px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: 1.6rem;
+    }
+    .panel { margin-bottom: 1.1rem; }
+    .panel-label {
+      font-size: .8rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .05em; color: var(--text-muted); margin-bottom: .4rem;
+      display: flex; align-items: center; gap: .4rem;
+    }
+    .flag { font-size: 1rem; }
+    .box {
+      min-height: 84px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: .9rem 1rem;
+      font-size: 1.15rem; line-height: 1.5;
+      background: var(--cream);
+    }
+    .box.es { background: #fff8ef; }
+    .box.en { background: #f1f6ff; color: var(--navy); font-weight: 500; }
+    .box .interim { color: var(--text-muted); font-style: italic; }
+    .box .placeholder { color: #b3ada3; }
+    .controls { display: flex; gap: .75rem; margin-top: 1.3rem; }
+    button {
+      flex: 1; font: inherit; font-weight: 700; cursor: pointer;
+      border-radius: var(--radius); padding: .85rem 1rem;
+      transition: all .2s ease; border: 2px solid var(--navy);
+    }
+    .btn-mic {
+      background: linear-gradient(135deg, var(--orange), var(--yellow));
+      color: var(--white); border-color: transparent;
+    }
+    .btn-mic.listening {
+      background: #e23b3b;
+      animation: pulse 1.3s infinite;
+    }
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(226,59,59,.5); }
+      70%  { box-shadow: 0 0 0 14px rgba(226,59,59,0); }
+      100% { box-shadow: 0 0 0 0 rgba(226,59,59,0); }
+    }
+    .btn-ghost { background: var(--white); color: var(--navy); }
+    .btn-ghost:hover { background: var(--navy); color: var(--white); }
+    .row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 1.1rem; font-size: .9rem; color: var(--text-muted);
+    }
+    .row label { display: flex; align-items: center; gap: .4rem; cursor: pointer; }
+    .status { text-align: center; margin-top: 1rem; min-height: 1.2rem;
+      font-size: .9rem; color: var(--text-muted); }
+    .status.error { color: #e23b3b; font-weight: 600; }
+    .hint { font-size: .85rem; color: var(--text-muted); text-align: center; margin-top: 1.4rem; max-width: 560px; }
+    .speaker-btn {
+      flex: 0 0 auto; width: 44px; padding: 0; font-size: 1.1rem;
+      border-color: var(--border); background: var(--white); color: var(--navy);
+    }
+    .en-row { display: flex; gap: .6rem; align-items: stretch; }
+    .en-row .box { flex: 1; }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="brand"><span class="logi">Logi</span><span class="ai">AI</span></a>
+
+  <h1>Live Voice Translator</h1>
+  <p class="sub">Speak in <strong>Spanish</strong> — read &amp; hear it instantly in <strong>English</strong>.</p>
+
+  <div class="card">
+    <div class="panel">
+      <div class="panel-label"><span class="flag">🇪🇸</span> You said (Spanish)</div>
+      <div id="esBox" class="box es"><span class="placeholder">Press “Start listening” and begin speaking…</span></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-label"><span class="flag">🇬🇧</span> Translation (English)</div>
+      <div class="en-row">
+        <div id="enBox" class="box en"><span class="placeholder">English translation appears here…</span></div>
+        <button id="replayBtn" class="speaker-btn" title="Hear it again" aria-label="Replay English audio">🔊</button>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="micBtn" class="btn-mic">🎤 Start listening</button>
+      <button id="clearBtn" class="btn-ghost">Clear</button>
+    </div>
+
+    <div class="row">
+      <label><input type="checkbox" id="speakToggle" checked /> Speak the English aloud</label>
+    </div>
+
+    <div id="status" class="status"></div>
+  </div>
+
+  <p class="hint">Tip: Use Google Chrome or Microsoft Edge and allow microphone access. Keep talking — each sentence is translated as you pause.</p>
+
+  <script>
+    const esBox     = document.getElementById('esBox');
+    const enBox     = document.getElementById('enBox');
+    const micBtn    = document.getElementById('micBtn');
+    const clearBtn  = document.getElementById('clearBtn');
+    const replayBtn = document.getElementById('replayBtn');
+    const speakToggle = document.getElementById('speakToggle');
+    const statusEl  = document.getElementById('status');
+
+    let lastEnglish = '';
+
+    function setStatus(msg, isError) {
+      statusEl.textContent = msg || '';
+      statusEl.classList.toggle('error', !!isError);
+    }
+
+    // ---- Speech synthesis (hear English) ----
+    function speakEnglish(text) {
+      if (!text || !speakToggle.checked || !('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'en-US';
+      u.rate = 1;
+      window.speechSynthesis.speak(u);
+    }
+
+    replayBtn.addEventListener('click', () => {
+      if (lastEnglish) {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(lastEnglish);
+        u.lang = 'en-US';
+        window.speechSynthesis.speak(u);
+      }
+    });
+
+    // ---- Translation (Spanish -> English) via free MyMemory API ----
+    async function translate(spanishText) {
+      const text = spanishText.trim();
+      if (!text) return '';
+      const url = 'https://api.mymemory.translated.net/get?q='
+        + encodeURIComponent(text) + '&langpair=es|en';
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('Translation service error (' + res.status + ')');
+      const data = await res.json();
+      const out = data && data.responseData && data.responseData.translatedText;
+      if (!out) throw new Error('No translation returned');
+      return out;
+    }
+
+    async function handleFinal(spanishText) {
+      if (!spanishText.trim()) return;
+      enBox.innerHTML = '<span class="interim">Translating…</span>';
+      try {
+        const english = await translate(spanishText);
+        lastEnglish = english;
+        enBox.textContent = english;
+        speakEnglish(english);
+      } catch (err) {
+        enBox.innerHTML = '<span class="placeholder">—</span>';
+        setStatus(err.message, true);
+      }
+    }
+
+    // ---- Speech recognition (listen in Spanish) ----
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    let recognition = null;
+    let listening = false;
+    let userStopped = false;
+
+    if (!SR) {
+      micBtn.disabled = true;
+      setStatus('Speech recognition is not supported in this browser. Try Chrome or Edge.', true);
+    } else {
+      recognition = new SR();
+      recognition.lang = 'es-ES';
+      recognition.continuous = true;
+      recognition.interimResults = true;
+
+      recognition.onresult = (event) => {
+        let interim = '';
+        let finalText = '';
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          const transcript = event.results[i][0].transcript;
+          if (event.results[i].isFinal) finalText += transcript;
+          else interim += transcript;
+        }
+        if (finalText) {
+          esBox.textContent = finalText.trim();
+          handleFinal(finalText);
+        } else if (interim) {
+          esBox.innerHTML = '<span class="interim">' + interim + '</span>';
+        }
+      };
+
+      recognition.onerror = (e) => {
+        if (e.error === 'no-speech') return;
+        if (e.error === 'not-allowed' || e.error === 'service-not-allowed') {
+          setStatus('Microphone access was blocked. Please allow it and try again.', true);
+          stopListening();
+        } else {
+          setStatus('Recognition error: ' + e.error, true);
+        }
+      };
+
+      recognition.onend = () => {
+        // Auto-restart if the engine stops on its own while still listening.
+        if (listening && !userStopped) {
+          try { recognition.start(); } catch (_) {}
+        } else {
+          setMicState(false);
+        }
+      };
+    }
+
+    function setMicState(on) {
+      listening = on;
+      micBtn.classList.toggle('listening', on);
+      micBtn.textContent = on ? '⏹ Stop listening' : '🎤 Start listening';
+    }
+
+    function startListening() {
+      if (!recognition) return;
+      userStopped = false;
+      try {
+        recognition.start();
+        setMicState(true);
+        setStatus('Listening… speak in Spanish.');
+      } catch (_) { /* already started */ }
+    }
+
+    function stopListening() {
+      userStopped = true;
+      if (recognition) recognition.stop();
+      setMicState(false);
+      setStatus('Stopped.');
+    }
+
+    micBtn.addEventListener('click', () => {
+      if (listening) stopListening();
+      else startListening();
+    });
+
+    clearBtn.addEventListener('click', () => {
+      esBox.innerHTML = '<span class="placeholder">Press “Start listening” and begin speaking…</span>';
+      enBox.innerHTML = '<span class="placeholder">English translation appears here…</span>';
+      lastEnglish = '';
+      setStatus('');
+    });
+
+    // Warm up voices list (some browsers load asynchronously).
+    if ('speechSynthesis' in window) window.speechSynthesis.getVoices();
+  </script>
+</body>
+</html>
