@@ -1,39 +1,51 @@
-// Live Spanish -> English voice translator.
-// Listen (Web Speech API) -> translate (MyMemory free API) -> speak (SpeechSynthesis).
+// Two-way live voice translator: English <-> Spanish.
+// Tap a language button -> listen in that language -> translate to the other
+// -> show both in a chat transcript and speak the translation aloud.
+// Tap-each-turn (single utterance per tap); mic is off during playback so it
+// never transcribes its own synthesized voice.
 
-const esBox      = document.getElementById('esBox');
-const enBox      = document.getElementById('enBox');
-const micBtn     = document.getElementById('micBtn');
-const clearBtn   = document.getElementById('clearBtn');
-const replayBtn  = document.getElementById('replayBtn');
+const convo       = document.getElementById('convo');
+const emptyMsg    = document.getElementById('empty');
+const micEn       = document.getElementById('micEn');
+const micEs       = document.getElementById('micEs');
 const speakToggle = document.getElementById('speakToggle');
-const statusEl   = document.getElementById('status');
+const clearBtn    = document.getElementById('clearBtn');
+const statusEl    = document.getElementById('status');
 
-let lastEnglish = '';
+// Per-language config. `lang` = recognition/synthesis locale; `to` = target lang.
+const LANGS = {
+  en: { recog:'en-US', speak:'en-US', to:'es', flag:'🇬🇧', name:'English', side:'en' },
+  es: { recog:'es-ES', speak:'es-ES', to:'en', flag:'🇪🇸', name:'Spanish', side:'es' },
+};
 
-function setStatus(msg, isError) {
+let activeLang = null;     // 'en' | 'es' | null
+let userStopped = false;
+
+function setStatus(msg, kind) {
   statusEl.textContent = msg || '';
-  statusEl.classList.toggle('error', !!isError);
+  statusEl.className = 'status' + (kind ? ' ' + kind : '');
 }
 
-// ---- Speech synthesis (hear English) ----
-function speak(text) {
-  if (!text || !('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'en-US';
-  u.rate = 1;
-  window.speechSynthesis.speak(u);
+// ---------- Speech synthesis ----------
+function speak(text, locale) {
+  return new Promise((resolve) => {
+    if (!text || !('speechSynthesis' in window)) return resolve();
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = locale;
+    u.rate = 1;
+    u.onend = resolve;
+    u.onerror = resolve;
+    window.speechSynthesis.speak(u);
+  });
 }
 
-replayBtn.addEventListener('click', () => { if (lastEnglish) speak(lastEnglish); });
-
-// ---- Translation (Spanish -> English) ----
-async function translate(spanishText) {
-  const text = spanishText.trim();
-  if (!text) return '';
+// ---------- Translation (free MyMemory API) ----------
+async function translate(text, from, to) {
+  const q = text.trim();
+  if (!q) return '';
   const url = 'https://api.mymemory.translated.net/get?q='
-    + encodeURIComponent(text) + '&langpair=es|en';
+    + encodeURIComponent(q) + '&langpair=' + from + '|' + to;
   const res = await fetch(url);
   if (!res.ok) throw new Error('Translation service error (' + res.status + ')');
   const data = await res.json();
@@ -42,33 +54,52 @@ async function translate(spanishText) {
   return out;
 }
 
-async function handleFinal(spanishText) {
-  if (!spanishText.trim()) return;
-  enBox.innerHTML = '<span class="interim">Translating…</span>';
-  try {
-    const english = await translate(spanishText);
-    lastEnglish = english;
-    enBox.textContent = english;
-    if (speakToggle.checked) speak(english);
-  } catch (err) {
-    enBox.innerHTML = '<span class="placeholder">—</span>';
-    setStatus(err.message, true);
-  }
+// ---------- Transcript ----------
+function addBubble(sourceLang, originalText, translatedText) {
+  if (emptyMsg) emptyMsg.style.display = 'none';
+  const cfg = LANGS[sourceLang];
+  const toCfg = LANGS[cfg.to];
+
+  const bubble = document.createElement('div');
+  bubble.className = 'bubble ' + cfg.side;
+  bubble.innerHTML =
+    '<div class="who">' + cfg.flag + ' ' + cfg.name + ' → ' + toCfg.flag + ' ' + toCfg.name + '</div>'
+    + '<div class="orig"></div>'
+    + '<div class="trans"></div>'
+    + '<button class="replay">🔊 Play again</button>';
+  bubble.querySelector('.orig').textContent = originalText;
+  bubble.querySelector('.trans').textContent = translatedText;
+  bubble.querySelector('.replay').addEventListener('click', () => speak(translatedText, toCfg.speak));
+
+  convo.appendChild(bubble);
+  convo.scrollTop = convo.scrollHeight;
 }
 
-// ---- Speech recognition (listen in Spanish) ----
+let interimEl = null;
+function showInterim(sourceLang, text) {
+  if (!interimEl) {
+    if (emptyMsg) emptyMsg.style.display = 'none';
+    interimEl = document.createElement('div');
+    interimEl.className = 'bubble interim ' + LANGS[sourceLang].side;
+    convo.appendChild(interimEl);
+  }
+  interimEl.textContent = text;
+  convo.scrollTop = convo.scrollHeight;
+}
+function clearInterim() {
+  if (interimEl) { interimEl.remove(); interimEl = null; }
+}
+
+// ---------- Speech recognition ----------
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 let recognition = null;
-let listening = false;
-let userStopped = false;
 
 if (!SR) {
-  micBtn.disabled = true;
-  setStatus('Speech recognition is not supported here. Try Chrome or Edge.', true);
+  setStatus('Speech recognition is not supported here. Try Chrome or Edge.', 'error');
+  micEn.disabled = micEs.disabled = true;
 } else {
   recognition = new SR();
-  recognition.lang = 'es-ES';
-  recognition.continuous = true;
+  recognition.continuous = false;     // one utterance per tap (reliable turn-taking)
   recognition.interimResults = true;
 
   recognition.onresult = (event) => {
@@ -79,64 +110,95 @@ if (!SR) {
       else interim += t;
     }
     if (finalText) {
-      esBox.textContent = finalText.trim();
-      handleFinal(finalText);
-    } else if (interim) {
-      esBox.innerHTML = '<span class="interim">' + interim + '</span>';
+      clearInterim();
+      handleUtterance(activeLang, finalText.trim());
+    } else if (interim && activeLang) {
+      showInterim(activeLang, interim);
     }
   };
 
   recognition.onerror = (e) => {
-    if (e.error === 'no-speech') return;
+    if (e.error === 'no-speech') { setStatus('Didn’t catch that — tap and try again.'); return; }
     if (e.error === 'not-allowed' || e.error === 'service-not-allowed') {
-      setStatus('Microphone access was blocked. Please allow it and try again.', true);
-      stopListening();
-    } else {
-      setStatus('Recognition error: ' + e.error, true);
+      setStatus('Microphone access was blocked. Please allow it and try again.', 'error');
+    } else if (e.error !== 'aborted') {
+      setStatus('Recognition error: ' + e.error, 'error');
     }
   };
 
   recognition.onend = () => {
-    // Auto-restart if the engine stops on its own while still listening.
-    if (listening && !userStopped) {
-      try { recognition.start(); } catch (_) {}
-    } else {
-      setMicState(false);
-    }
+    // Single-utterance mode: recognition ends after the pause. Reset UI.
+    clearInterim();
+    if (activeLang) stopListening();
   };
 }
 
-function setMicState(on) {
-  listening = on;
-  micBtn.classList.toggle('listening', on);
-  micBtn.textContent = on ? '⏹ Stop listening' : '🎤 Start listening';
+async function handleUtterance(sourceLang, text) {
+  if (!text) return;
+  const cfg = LANGS[sourceLang];
+  // Stop listening immediately so the mic is off while we translate + speak.
+  stopListening();
+  setStatus('Translating…', 'live');
+  try {
+    const translated = await translate(text, sourceLang, cfg.to);
+    addBubble(sourceLang, text, translated);
+    setStatus('');
+    if (speakToggle.checked) {
+      setStatus('🔊 Speaking ' + LANGS[cfg.to].name + '…', 'live');
+      await speak(translated, LANGS[cfg.to].speak);
+      setStatus('');
+    }
+  } catch (err) {
+    setStatus(err.message, 'error');
+  }
 }
 
-function startListening() {
+function micFor(lang) { return lang === 'en' ? micEn : micEs; }
+
+function setListeningUI(lang) {
+  [micEn, micEs].forEach((b) => {
+    const isActive = lang && b.dataset.lang === lang;
+    b.classList.toggle('listening', isActive);
+    b.classList.toggle('dim', !!lang && !isActive);
+  });
+}
+
+function startListening(lang) {
   if (!recognition) return;
+  // If already listening in this language, treat the tap as "stop".
+  if (activeLang === lang) { stopListening(); return; }
+  // Switching languages: abort any current session first.
+  if (activeLang) { userStopped = true; try { recognition.abort(); } catch (_) {} }
+  window.speechSynthesis && window.speechSynthesis.cancel();
+
+  activeLang = lang;
   userStopped = false;
+  recognition.lang = LANGS[lang].recog;
+  setListeningUI(lang);
+  setStatus('🎙️ Listening — speak ' + LANGS[lang].name + '…', 'live');
   try {
     recognition.start();
-    setMicState(true);
-    setStatus('Listening… speak in Spanish.');
-  } catch (_) { /* already started */ }
+  } catch (_) {
+    // start() can throw if a prior session hasn't fully ended; retry shortly.
+    setTimeout(() => { try { recognition.start(); } catch (e) {} }, 250);
+  }
 }
 
 function stopListening() {
+  if (!activeLang) return;
   userStopped = true;
-  if (recognition) recognition.stop();
-  setMicState(false);
-  setStatus('Stopped.');
+  activeLang = null;
+  setListeningUI(null);
+  try { recognition.stop(); } catch (_) {}
 }
 
-micBtn.addEventListener('click', () => {
-  if (listening) stopListening(); else startListening();
-});
+micEn.addEventListener('click', () => startListening('en'));
+micEs.addEventListener('click', () => startListening('es'));
 
 clearBtn.addEventListener('click', () => {
-  esBox.innerHTML = '<span class="placeholder">Press “Start listening” and speak…</span>';
-  enBox.innerHTML = '<span class="placeholder">English appears here…</span>';
-  lastEnglish = '';
+  convo.querySelectorAll('.bubble').forEach((b) => b.remove());
+  interimEl = null;
+  if (emptyMsg) emptyMsg.style.display = '';
   setStatus('');
 });
 

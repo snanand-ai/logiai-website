@@ -2,105 +2,127 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Live Translator — Spanish → English</title>
-  <meta name="description" content="Speak in Spanish, instantly read and hear it in English. A simple live voice translator." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Two-Way Voice Translator — English ⇄ Spanish</title>
+  <meta name="description" content="Two-way live voice translator. Tap your language, speak, and the other person hears it in theirs. English and Spanish." />
   <style>
     :root {
-      --bg1:#0f172a; --bg2:#1e293b; --card:#1e293b;
-      --accent:#f97316; --accent2:#fbbf24; --en:#38bdf8;
+      --bg1:#0f172a; --card:#1e293b;
+      --en:#38bdf8; --en-deep:#0284c7;
+      --es:#f97316; --es-deep:#ea580c;
       --text:#e2e8f0; --muted:#94a3b8; --border:#334155;
-      --radius:16px;
     }
-    * { box-sizing:border-box; margin:0; padding:0; }
+    * { box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
+    html, body { height:100%; }
     body {
       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
       background:radial-gradient(1200px 600px at 50% -10%, #1e293b, var(--bg1));
-      color:var(--text); min-height:100vh;
+      color:var(--text);
       display:flex; flex-direction:column; align-items:center;
-      padding:2.2rem 1rem 3rem;
+      padding:1rem 1rem 1.2rem;
     }
-    h1 { font-size:clamp(1.6rem,4vw,2.4rem); text-align:center; line-height:1.2; }
-    h1 .es { color:var(--accent); } h1 .en { color:var(--en); }
-    .sub { color:var(--muted); margin:.6rem 0 1.8rem; text-align:center; }
-    .card {
-      background:var(--card); width:100%; max-width:580px;
-      border:1px solid var(--border); border-radius:var(--radius);
-      padding:1.6rem; box-shadow:0 20px 60px rgba(0,0,0,.4);
+    header { text-align:center; margin-bottom:.8rem; }
+    h1 { font-size:clamp(1.2rem,4.5vw,1.7rem); line-height:1.2; }
+    h1 .en { color:var(--en); } h1 .es { color:var(--es); }
+    .sub { color:var(--muted); font-size:.85rem; margin-top:.25rem; }
+
+    .app { width:100%; max-width:600px; display:flex; flex-direction:column; flex:1; min-height:0; }
+
+    /* Conversation transcript */
+    .convo {
+      flex:1; min-height:200px; overflow-y:auto;
+      background:var(--card); border:1px solid var(--border); border-radius:16px;
+      padding:1rem; display:flex; flex-direction:column; gap:.75rem;
     }
-    .panel { margin-bottom:1.1rem; }
-    .panel-label {
-      font-size:.78rem; font-weight:700; text-transform:uppercase;
-      letter-spacing:.06em; color:var(--muted); margin-bottom:.45rem;
-      display:flex; align-items:center; gap:.45rem;
+    .empty { margin:auto; text-align:center; color:#5b6b82; font-size:.95rem; line-height:1.6; }
+    .bubble {
+      max-width:85%; padding:.7rem .9rem; border-radius:14px;
+      border:1px solid var(--border); background:rgba(15,23,42,.5);
     }
-    .box {
-      min-height:88px; border:1px solid var(--border); border-radius:12px;
-      padding:.9rem 1rem; font-size:1.18rem; line-height:1.5;
-      background:rgba(15,23,42,.6);
+    .bubble.en { align-self:flex-start; border-left:3px solid var(--en); }
+    .bubble.es { align-self:flex-end;   border-right:3px solid var(--es); }
+    .bubble .who {
+      font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;
+      color:var(--muted); margin-bottom:.3rem; display:flex; align-items:center; gap:.35rem;
     }
-    .box.en { color:var(--en); font-weight:500; border-color:rgba(56,189,248,.35); }
-    .box .interim { color:var(--muted); font-style:italic; }
-    .box .placeholder { color:#5b6b82; }
-    .en-row { display:flex; gap:.6rem; align-items:stretch; }
-    .en-row .box { flex:1; }
-    button {
-      font:inherit; font-weight:700; cursor:pointer; border-radius:12px;
-      padding:.85rem 1rem; transition:all .2s ease; border:1px solid var(--border);
-      background:#0f172a; color:var(--text);
+    .bubble .orig { font-size:.92rem; color:var(--muted); }
+    .bubble .trans { font-size:1.12rem; font-weight:500; margin-top:.2rem; }
+    .bubble.en .trans { color:var(--es); }
+    .bubble.es .trans { color:var(--en); }
+    .bubble .replay {
+      margin-top:.35rem; font-size:.78rem; color:var(--muted);
+      background:none; border:none; cursor:pointer; padding:0; display:inline-flex; gap:.25rem; align-items:center;
     }
-    button:hover { border-color:var(--accent); }
-    .controls { display:flex; gap:.75rem; margin-top:1.3rem; }
-    .controls button { flex:1; }
-    .btn-mic {
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      color:#0f172a; border-color:transparent;
-    }
-    .btn-mic.listening { background:#ef4444; color:#fff; animation:pulse 1.3s infinite; }
-    @keyframes pulse {
-      0%{box-shadow:0 0 0 0 rgba(239,68,68,.5);}
-      70%{box-shadow:0 0 0 14px rgba(239,68,68,0);}
-      100%{box-shadow:0 0 0 0 rgba(239,68,68,0);}
-    }
-    .speaker-btn { flex:0 0 auto; width:48px; padding:0; font-size:1.15rem; }
-    .row { display:flex; align-items:center; margin-top:1.1rem; font-size:.9rem; color:var(--muted); }
-    .row label { display:flex; align-items:center; gap:.45rem; cursor:pointer; }
-    .status { text-align:center; margin-top:1rem; min-height:1.2rem; font-size:.9rem; color:var(--muted); }
+    .bubble.interim { opacity:.7; font-style:italic; }
+
+    .status { text-align:center; min-height:1.25rem; font-size:.88rem; color:var(--muted); margin:.7rem 0 .55rem; }
     .status.error { color:#f87171; font-weight:600; }
-    .hint { font-size:.85rem; color:var(--muted); text-align:center; margin-top:1.4rem; max-width:580px; }
+    .status.live { color:var(--text); font-weight:600; }
+
+    /* Language buttons */
+    .mics { display:flex; gap:.75rem; }
+    .mic {
+      flex:1; font:inherit; font-weight:700; cursor:pointer;
+      border-radius:14px; padding:1rem .6rem; color:#0f172a;
+      border:2px solid transparent; transition:transform .08s ease, filter .15s ease;
+      display:flex; flex-direction:column; align-items:center; gap:.2rem; line-height:1.1;
+    }
+    .mic .flag { font-size:1.5rem; }
+    .mic .lbl { font-size:1rem; }
+    .mic small { font-weight:600; opacity:.7; font-size:.72rem; }
+    .mic.en { background:linear-gradient(135deg,var(--en),#7dd3fc); }
+    .mic.es { background:linear-gradient(135deg,var(--es),#fbbf24); }
+    .mic:active { transform:scale(.97); }
+    .mic.listening { animation:pulse 1.2s infinite; color:#fff; }
+    .mic.en.listening { background:var(--en-deep); }
+    .mic.es.listening { background:var(--es-deep); }
+    .mic.dim { filter:saturate(.4) brightness(.8); }
+    @keyframes pulse {
+      0%{box-shadow:0 0 0 0 rgba(255,255,255,.45);}
+      70%{box-shadow:0 0 0 13px rgba(255,255,255,0);}
+      100%{box-shadow:0 0 0 0 rgba(255,255,255,0);}
+    }
+
+    .footer { display:flex; align-items:center; justify-content:space-between; margin-top:.8rem; font-size:.85rem; color:var(--muted); }
+    .footer label { display:flex; align-items:center; gap:.4rem; cursor:pointer; }
+    .footer button { background:none; border:none; color:var(--muted); cursor:pointer; font:inherit; text-decoration:underline; }
   </style>
 </head>
 <body>
-  <h1><span class="es">Spanish</span> → <span class="en">English</span></h1>
-  <p class="sub">Speak Spanish — read &amp; hear it live in English.</p>
+  <header>
+    <h1><span class="en">English</span> ⇄ <span class="es">Español</span></h1>
+    <div class="sub">Tap your language, speak, and they hear it in theirs.</div>
+  </header>
 
-  <div class="card">
-    <div class="panel">
-      <div class="panel-label"><span>🇪🇸</span> You said (Spanish)</div>
-      <div id="esBox" class="box"><span class="placeholder">Press “Start listening” and speak…</span></div>
-    </div>
-
-    <div class="panel">
-      <div class="panel-label"><span>🇬🇧</span> Translation (English)</div>
-      <div class="en-row">
-        <div id="enBox" class="box en"><span class="placeholder">English appears here…</span></div>
-        <button id="replayBtn" class="speaker-btn" title="Hear it again" aria-label="Replay English audio">🔊</button>
+  <div class="app">
+    <div id="convo" class="convo">
+      <div id="empty" class="empty">
+        🗣️ Tap a button below and start talking.<br>
+        Tap <strong>English</strong> to speak English (they hear Spanish).<br>
+        Tap <strong>Español</strong> to speak Spanish (they hear English).
       </div>
     </div>
 
-    <div class="controls">
-      <button id="micBtn" class="btn-mic">🎤 Start listening</button>
-      <button id="clearBtn">Clear</button>
-    </div>
-
-    <div class="row">
-      <label><input type="checkbox" id="speakToggle" checked /> Speak the English aloud</label>
-    </div>
-
     <div id="status" class="status"></div>
-  </div>
 
-  <p class="hint">Use Chrome or Edge and allow microphone access. Each sentence translates as you pause.</p>
+    <div class="mics">
+      <button id="micEn" class="mic en" data-lang="en">
+        <span class="flag">🇬🇧</span>
+        <span class="lbl">English</span>
+        <small>tap &amp; speak</small>
+      </button>
+      <button id="micEs" class="mic es" data-lang="es">
+        <span class="flag">🇪🇸</span>
+        <span class="lbl">Español</span>
+        <small>toca y habla</small>
+      </button>
+    </div>
+
+    <div class="footer">
+      <label><input type="checkbox" id="speakToggle" checked /> Speak translations aloud</label>
+      <button id="clearBtn">Clear chat</button>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>
