@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Live Translator — Spanish → English</title>
+  <meta name="description" content="Speak in Spanish, instantly read and hear it in English. A simple live voice translator." />
+  <style>
+    :root {
+      --bg1:#0f172a; --bg2:#1e293b; --card:#1e293b;
+      --accent:#f97316; --accent2:#fbbf24; --en:#38bdf8;
+      --text:#e2e8f0; --muted:#94a3b8; --border:#334155;
+      --radius:16px;
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body {
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      background:radial-gradient(1200px 600px at 50% -10%, #1e293b, var(--bg1));
+      color:var(--text); min-height:100vh;
+      display:flex; flex-direction:column; align-items:center;
+      padding:2.2rem 1rem 3rem;
+    }
+    h1 { font-size:clamp(1.6rem,4vw,2.4rem); text-align:center; line-height:1.2; }
+    h1 .es { color:var(--accent); } h1 .en { color:var(--en); }
+    .sub { color:var(--muted); margin:.6rem 0 1.8rem; text-align:center; }
+    .card {
+      background:var(--card); width:100%; max-width:580px;
+      border:1px solid var(--border); border-radius:var(--radius);
+      padding:1.6rem; box-shadow:0 20px 60px rgba(0,0,0,.4);
+    }
+    .panel { margin-bottom:1.1rem; }
+    .panel-label {
+      font-size:.78rem; font-weight:700; text-transform:uppercase;
+      letter-spacing:.06em; color:var(--muted); margin-bottom:.45rem;
+      display:flex; align-items:center; gap:.45rem;
+    }
+    .box {
+      min-height:88px; border:1px solid var(--border); border-radius:12px;
+      padding:.9rem 1rem; font-size:1.18rem; line-height:1.5;
+      background:rgba(15,23,42,.6);
+    }
+    .box.en { color:var(--en); font-weight:500; border-color:rgba(56,189,248,.35); }
+    .box .interim { color:var(--muted); font-style:italic; }
+    .box .placeholder { color:#5b6b82; }
+    .en-row { display:flex; gap:.6rem; align-items:stretch; }
+    .en-row .box { flex:1; }
+    button {
+      font:inherit; font-weight:700; cursor:pointer; border-radius:12px;
+      padding:.85rem 1rem; transition:all .2s ease; border:1px solid var(--border);
+      background:#0f172a; color:var(--text);
+    }
+    button:hover { border-color:var(--accent); }
+    .controls { display:flex; gap:.75rem; margin-top:1.3rem; }
+    .controls button { flex:1; }
+    .btn-mic {
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      color:#0f172a; border-color:transparent;
+    }
+    .btn-mic.listening { background:#ef4444; color:#fff; animation:pulse 1.3s infinite; }
+    @keyframes pulse {
+      0%{box-shadow:0 0 0 0 rgba(239,68,68,.5);}
+      70%{box-shadow:0 0 0 14px rgba(239,68,68,0);}
+      100%{box-shadow:0 0 0 0 rgba(239,68,68,0);}
+    }
+    .speaker-btn { flex:0 0 auto; width:48px; padding:0; font-size:1.15rem; }
+    .row { display:flex; align-items:center; margin-top:1.1rem; font-size:.9rem; color:var(--muted); }
+    .row label { display:flex; align-items:center; gap:.45rem; cursor:pointer; }
+    .status { text-align:center; margin-top:1rem; min-height:1.2rem; font-size:.9rem; color:var(--muted); }
+    .status.error { color:#f87171; font-weight:600; }
+    .hint { font-size:.85rem; color:var(--muted); text-align:center; margin-top:1.4rem; max-width:580px; }
+  </style>
+</head>
+<body>
+  <h1><span class="es">Spanish</span> → <span class="en">English</span></h1>
+  <p class="sub">Speak Spanish — read &amp; hear it live in English.</p>
+
+  <div class="card">
+    <div class="panel">
+      <div class="panel-label"><span>🇪🇸</span> You said (Spanish)</div>
+      <div id="esBox" class="box"><span class="placeholder">Press “Start listening” and speak…</span></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-label"><span>🇬🇧</span> Translation (English)</div>
+      <div class="en-row">
+        <div id="enBox" class="box en"><span class="placeholder">English appears here…</span></div>
+        <button id="replayBtn" class="speaker-btn" title="Hear it again" aria-label="Replay English audio">🔊</button>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="micBtn" class="btn-mic">🎤 Start listening</button>
+      <button id="clearBtn">Clear</button>
+    </div>
+
+    <div class="row">
+      <label><input type="checkbox" id="speakToggle" checked /> Speak the English aloud</label>
+    </div>
+
+    <div id="status" class="status"></div>
+  </div>
+
+  <p class="hint">Use Chrome or Edge and allow microphone access. Each sentence translates as you pause.</p>
+
+  <script src="app.js"></script>
+</body>
+</html>
